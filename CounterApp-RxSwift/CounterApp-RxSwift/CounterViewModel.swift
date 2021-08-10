@@ -15,7 +15,7 @@ struct CounterViewModelInput {
 }
 
 protocol CounterViewModelOutput {
-    var counterText: Driver<String> { get }
+    var counterText: Driver<String?> { get }
 }
 
 protocol CounterViewModelType {
@@ -71,9 +71,9 @@ class CounterRxViewModel: CounterViewModelType {
 }
 
 extension CounterRxViewModel: CounterViewModelOutput {
-    var counterText: Driver<String> {
+    var counterText: Driver<String?> {
         return countRelay
             .map { "Rxパターン:\($0)" }
-            .asDriver(onErrorJustReturn: "エラー")
+            .asDriver(onErrorJustReturn: nil)
     }
 }
